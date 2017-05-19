@@ -8,13 +8,21 @@ defmodule Coordinates do
   # omitted by having the rows defined here.
   @rows %{ "1" => 1, "2" => 2, "3" => 3, "4" => 4, "5" => 5, "6" => 6, "7" => 7, "8" => 8}
 
+  def get_square_coordinates(square_in_chess_notation) do
+    [get_column(square_in_ches_notation), get_row(square_in_ches_notation)]
+  end
+
   def get_column(square) do
     column_letter = square |> String.upcase |> String.at(0)
     @columns[column_letter]
   end
 
   def get_row(square) do
-    row = square |> String.at(1)
-    @rows[row]
+    cond do
+      String.length(square) == 2 ->
+        row = square |> String.at(1)
+        @rows[row]
+      true -> nil
+    end
   end
 end

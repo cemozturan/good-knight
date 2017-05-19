@@ -4,57 +4,57 @@ defmodule CoordinatesTest do
 
   describe "get_column/1" do
 
-    test "Letter A is column 1" do
+    test "letter A is column 1" do
       column = Coordinates.get_column("A3")
       assert column == 1
     end
 
-    test "Letter a is column 1" do
+    test "letter a is column 1" do
       column = Coordinates.get_column("a3")
       assert column == 1
     end
 
-    test "Letter B is column 2" do
+    test "letter B is column 2" do
       column = Coordinates.get_column("B3")
       assert column == 2
     end
 
-    test "Letter C is column 3" do
+    test "letter C is column 3" do
       column = Coordinates.get_column("C3")
       assert column == 3
     end
 
-    test "Letter D is column 4" do
+    test "letter D is column 4" do
       column = Coordinates.get_column("D3")
       assert column == 4
     end
 
-    test "Letter d is column 4" do
+    test "letter d is column 4" do
       column = Coordinates.get_column("d3")
       assert column == 4
     end
 
-    test "Letter E is column 5" do
+    test "letter E is column 5" do
       column = Coordinates.get_column("E3")
       assert column == 5
     end
 
-    test "Letter F is column 6" do
+    test "letter F is column 6" do
       column = Coordinates.get_column("F3")
       assert column == 6
     end
 
-    test "Letter G is column 7" do
+    test "letter G is column 7" do
       column = Coordinates.get_column("G3")
       assert column == 7
     end
 
-    test "Letter H is column 8" do
+    test "letter H is column 8" do
       column = Coordinates.get_column("H3")
       assert column == 8
     end
 
-    test "Letter I is nil" do
+    test "letter I is nil" do
       column = Coordinates.get_column("I3")
       assert column == nil
     end
@@ -108,19 +108,48 @@ defmodule CoordinatesTest do
       assert row == 8
     end
 
-    test "Numbers < 1 are nil" do
+    test "numbers < 1 are nil" do
       row = Coordinates.get_row("A0")
       assert row == nil
     end
 
-    test "Numbers > 8 are nil" do
+    test "numbers > 8 are nil" do
       row = Coordinates.get_row("A9")
+      assert row == nil
+    end
+
+    test "numbers that have more than 1 digit are nil" do
+      row = Coordinates.get_row("A23")
       assert row == nil
     end
 
     test "Non-numbers are nil" do
       row = Coordinates.get_row("DD")
       assert row == nil
+    end
+
+  end
+
+  describe "get_square_coordinates/1" do
+
+    test "returns numerical coordinates when given chess notation" do
+      coordinates = Coordinates.get_square_coordinates("b4")
+      assert coordinates == [2, 4]
+    end
+
+    test "returns nil for invalid columns" do
+      coordinates = Coordinates.get_square_coordinates("x7")
+      assert coordinates == [nil, 7]
+    end
+
+    test "returns nil for invalid rows" do
+      coordinates = Coordinates.get_square_coordinates("c9")
+      assert coordinates == [3, nil]
+    end
+
+    test "returns [nil, nil] if row and column is not in the expected order" do
+      coordinates = Coordinates.get_square_coordinates("5d")
+      assert coordinates == [nil, nil]
     end
 
   end
