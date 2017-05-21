@@ -134,22 +134,46 @@ defmodule CoordinatesTest do
 
     test "returns numerical coordinates when given chess notation" do
       coordinates = Coordinates.get_square_coordinates("b4")
-      assert coordinates == [2, 4]
+      assert coordinates == %{column: 2, row: 4}
     end
 
     test "returns nil for invalid columns" do
       coordinates = Coordinates.get_square_coordinates("x7")
-      assert coordinates == [nil, 7]
+      assert coordinates == %{column: nil, row: 7}
     end
 
     test "returns nil for invalid rows" do
       coordinates = Coordinates.get_square_coordinates("c9")
-      assert coordinates == [3, nil]
+      assert coordinates == %{column: 3, row: nil}
     end
 
     test "returns [nil, nil] if row and column is not in the expected order" do
       coordinates = Coordinates.get_square_coordinates("5d")
-      assert coordinates == [nil, nil]
+      assert coordinates == %{column: nil, row: nil}
+    end
+
+  end
+
+  describe "is_valid?/1" do
+
+    test "returns true for a valid chess square" do
+      assert Coordinates.is_valid?(%{column: 8, row: 1}) == :true
+    end
+
+    test "returns false for a chess square with a row < 1" do
+      assert Coordinates.is_valid?(%{column: 2, row: 0}) == :false
+    end
+
+    test "returns false for a chess square with a row > 8" do
+      assert Coordinates.is_valid?(%{column: 2, row: 9}) == :false
+    end
+
+    test "returns false for a chess square with a column < 1" do
+      assert Coordinates.is_valid?(%{column: -1, row: 5}) == :false
+    end
+
+    test "returns false for a chess square with a column > 8" do
+      assert Coordinates.is_valid?(%{column: 9, row: 4}) == :false
     end
 
   end
