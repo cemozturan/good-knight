@@ -34,7 +34,7 @@ defmodule KnightMovesTest do
       assert (length from_g7)  == 4
     end
 
-    test "returns the 3 correct squares for a knight on the a2 squares" do
+    test "returns the 3 correct squares for a knight on the a2 square" do
       possible_squares = KnightMoves.get_possible_squares(%{column: 1, row: 2})
       assert possible_squares == [%{column: 2, row: 4}, %{column: 3, row: 3}, %{column: 3, row: 1}]
     end
@@ -72,11 +72,6 @@ defmodule KnightMovesTest do
       assert (length from_h1)  == 2
       assert (length from_a8)  == 2
       assert (length from_h8)  == 2
-    end
-
-    test "returns an empty list for a knight on a non-existing square" do
-      possible_squares = KnightMoves.get_possible_squares(%{column: 10, row: 3})
-      assert possible_squares == []
     end
 
   end
