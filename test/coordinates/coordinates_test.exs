@@ -177,4 +177,15 @@ defmodule CoordinatesTest do
     end
 
   end
+
+  describe "get_chess_notation_from_coordinates/1" do
+
+    test "returns 'D4' for column 4 and row 4" do
+      assert Coordinates.get_chess_notation_from_coordinates(%{column: 4, row: 4}) == "D4"
+    end
+
+    test "returns 'A7' for column 1 and row 7" do
+      assert Coordinates.get_chess_notation_from_coordinates(%{column: 1, row: 7}) == "A7"
+    end
+  end
 end

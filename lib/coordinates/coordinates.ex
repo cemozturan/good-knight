@@ -39,4 +39,16 @@ defmodule Coordinates do
   # %{column: 9, row: 6} -> :false
   # %{column: 3, row: 9} -> :false
   def is_valid?(%{column: column, row: row}), do: column < 9 && column > 0 && row < 9 && row > 0
+
+  # Given a square in %{column: column_number, row: row_number} format,
+  # returns chess notation representation for the square
+  # Example input/output:
+  # %{column: 1, row: 3} -> "A3"
+  # %{column: 2, row: 6} -> "B6"
+  def get_chess_notation_from_coordinates(%{column: column, row: row}) do
+    column_letter = @columns
+      |> Enum.find(fn {_, val} -> val == column end)
+      |> elem(0)
+    column_letter <> Integer.to_string(row)
+  end
 end
