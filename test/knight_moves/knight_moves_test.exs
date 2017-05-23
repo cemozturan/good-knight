@@ -2,6 +2,16 @@ defmodule KnightMovesTest do
   use ExUnit.Case, async: true
   alias KnightMoves
 
+  # Number of squares a knight can move to from a given square
+  # |2|3|4|4|4|4|3|2|
+  # |3|4|6|6|6|6|4|3|
+  # |4|6|8|8|8|8|6|4|
+  # |4|6|8|8|8|8|6|4|
+  # |4|6|8|8|8|8|6|4|
+  # |4|6|8|8|8|8|6|4|
+  # |3|4|6|6|6|6|4|3|
+  # |2|3|4|4|4|4|3|2|
+
   describe "get_possible_squares/1" do
 
     test "returns 8 possible squares for a central knight (inside the c3 x f6 area)" do
